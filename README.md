@@ -1,6 +1,4 @@
-# rose_only
-
-> A Vue.js project
+# rose> A Vue.js project
 
 ## Build Setup
 
