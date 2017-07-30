@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>rose_only</title><link rel=stylesheet href=/static/css/reset.css><link rel=stylesheet href=/static/css/swiper-3.4.2.min.css><link rel=stylesheet href=/static/css/rocket.min.css><link href=/static/css/app.5d6a8e23e9dbc6de52171ab4e69d44cf.css rel=stylesheet></head><style lang=less>@base: #444;
+    *{
+      box-sizing: border-box;
+    }
+    body{
+      margin: 0;
+      color: @base;
+      font-size: 1.4rem;
+    }
+    html{
+      font-size: 10px;
+    }
+    h2 {
+      font-size: 1.8rem;
+    }
+    h3{
+      font-size: 1.6rem;
+    }
+    a{
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
+      color:#3174c7
+    }
+    /*复选款样式*/
+    [type='checkbox']{
+      display: none;
+    }
+    label {
+      background: url(/static/img/checkbox.jpg) no-repeat;
+      display: inline-block;
+      white-space: nowrap;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-size: 20px;
+    }
+    .bgposition {
+      background-position: 0 100%;
+      background-color: rgb(199, 31, 44);
+    }</style><body><div id=app></div><script src=/static/js/swiper-3.4.2.min.js></script><script src=/static/js/rocket.min.js></script><script src=/static/js/jquery-3.2.1.min.js></script><script>function testAccount (val) {
+        let parsed = Number(val)
+        if (!!parsed) {//数字或字符串转为布尔值用!!
+          let regTel = /^1[34578]\d{9}$/;
+          if (!regTel.test(val)) {
+            console.log('手机号码格式不正确，请重新输入')
+            return false
+          }
+        }else {
+          let regMail = /^(\w+)@{1}(\w+)\.(\w+)$/
+          if (!regMail.test(val)) {
+            console.log('邮箱格式不正确，请重新输入')
+            return false
+          }
+
+        }
+        return true
+      }
+      function testPwd (val) {
+        let regPwd =  /^(\w){6,20}$/;
+        if(!regPwd.test(val)){
+          console.log('密码格式不正确，请重新输入')
+          return false
+        }
+        return true
+      }
+      //随机生成数字，含min,不含
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min) ) + min;
+      }</script><script type=text/javascript src=/static/js/manifest.2ba4635f94dbbd3aa34a.js></script><script type=text/javascript src=/static/js/vendor.771d1c465c34837656dc.js></script><script type=text/javascript src=/static/js/app.d4fd0ae61f948279df21.js></script></body></html>
