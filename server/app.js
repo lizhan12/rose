@@ -32,23 +32,7 @@ const issue2options = {
     credentials: true,
     maxAge: 3600
 };
-//前后端端口不一样，跨域获取文件，对后端响应头作设置
-//const setCors = function(req,res){
-  // 获取请求头url,并解析
-  // const parsed = parseUrl(req.header('referer') || '');
-  // if (parsed.host) {
-    // res.header('Access-Control-Allow-Credentials', 'true');
-    // res.header('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type');
-    // res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,HEAD');
-    // res.header('Access-Control-Allow-Origin', "*");
-  //   res.header("Access-Control-Allow-Origin", "*");
-  //   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  //   res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-  //   res.header("X-Powered-By",' 3.2.1')
-  //   res.header("Content-Type", "application/json;charset=utf-8");
-  //   next();
-  // }
-//};
+
 //引入自定义文件
 const user = require('./user.js');
 const product = require('./product.js');
