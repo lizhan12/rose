@@ -55,9 +55,6 @@ module.exports ={
     var pwd = req.body.pwd;
     var ctry = req.body.country;
     console.log(req.body)
-    //req.on('data',(buf)=>{
-     // var obj = qs.parse(buf.toString());
-      //console.log(obj);
       pool.getConnection((err,conn)=>{
         conn.query('SELECT * FROM user WHERE country=? AND account=?',[ctry,acct],(err,result)=>{
           if(result.length>=1){
@@ -72,10 +69,8 @@ module.exports ={
           conn.release();
         })
       })
-    //})
   },
   register: (req,res) => {
-    console.log(req.body)
     const acct = req.body.account;
     const pwd = req.body.pwd;
     const ctry = req.body.country;
@@ -100,7 +95,6 @@ module.exports ={
         res.json(output);
         conn.release();
       });
-
     })
   },
   captcha: (req,res) => {
@@ -108,7 +102,6 @@ module.exports ={
     let txt = ary[0];
     let buf = ary[1];
     req.session.imgCode = txt;
-    console.log(txt);
     res.end(buf);
   },
   msgcode: (req,res) => {
@@ -125,7 +118,6 @@ module.exports ={
     pool.getConnection((err,conn) => {
       //查询数据库中账号是否已存在，如果存在就返回客户端信息：该账号已存在，请重新输入
       conn.query('SELECT * FROM user WHERE account = ?',[acct],(err,result) => {
-        console.log(result.length)
         if (result.length >= 1) {
           var output = {
             code: 5,

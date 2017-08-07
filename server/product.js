@@ -2,7 +2,6 @@
  * Created by yupeiying on 6/23/17.
  */
 const pool = require('./pool');
-const await = require('await')
 function getConn() {
     return new Promise((resolve, reject) => {
         pool.getConnection((e, conn) => {
@@ -44,27 +43,9 @@ module.exports ={
         conn.release();
       })
     })
-    //const conn =  getConn()
-    //const roseItems = getMain(conn);
-    //console.log(roseItems)
-
-    //res.json(roseItems); //把指定的对象转换为JSON字符串，并输出给客户端 = JSON.stringify + write + setHeader
-    //conn.release();
-    // pool.getConnection((err, conn)=>{
-    //   conn.query('SELECT * FROM ro_item',(err, result)=>{
-    //     const roseItems = result;
-    //     //setCors(req,res);
-    //     res.json(roseItems); //把指定的对象转换为JSON字符串，并输出给客户端 = JSON.stringify + write + setHeader
-    //     conn.release();
-    //   })
-    // })
+  
   },
   detail:  (req, res)=> {
-    // const conn = getConn();
-    // getData(req, conn).then(data => {
-    //   res.json(data);
-    //   conn.release();
-    // });
     getConn().then(conn=>{
       const pid = req.params.pid;
       const cid = req.params.cid;
@@ -79,13 +60,8 @@ module.exports ={
             conn.release();
             return data;
           })
-        })
-       
-      
-      
-      
-    })   
-    
+        })                       
+    })       
   },
   addCart: (req,res) => {
     const items = req.session.items || [];
@@ -104,36 +80,13 @@ module.exports ={
   cart:  (req,res) => {
     const items = req.session.items || [];
     const conn =  getConn();
-    // const conn = getConn().then(conn=>{
-    //   return conn
-    // })
     let itemsList = [];
     let progress=0;
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
-      //const color =  getColorImg(getConn(), item.pid, item.cid); 
-      //const simg = color[0].current_col_img;
-     
-      //   pool.getConnection((err,conn)=>{
-      //   conn.query('SELECT current_col_img FROM ro_color WHERE pid=? AND cid=?',[item.pid, item.cid],(err,result)=>{
-      //     itemsList.push(result[0].current_col_img);
-      //     progress++
-      //     if(progress==items.length){
-      //       console.log(itemsList);
-      //     }
-          
-      //   }
-      //   );
-
-      // })
-  
       conn.then(conn=>{
         execQuery(conn, 'SELECT current_col_img FROM ro_color WHERE pid=? AND cid=?', [item.pid, item.cid]).then(result=>{
           return result 
-          //const color=result;
-         // const simg = color[0].current_col_img;
-          //console.log(simg+'cart');
-          //conn.release();
         }).then(data=>{
           execQuery(conn, 'SELECT * FROM ro_item WHERE pid=?', [item.pid]).then(result=>{
             const product = result;
@@ -150,21 +103,7 @@ module.exports ={
           })
         });               
       })
-     
-       //const product =  getProduct(conn,item.pid);
-       //console.log(product)
-      // product[0].simg = simg;
-      // product[0].count = item.count;
-      // product[0].selected = true;
-      // itemsList.push(product[0]);
   }
-  // if(itemsList.length>=1){
-  //   console.log(itemsList+"lizhan")
-  // }
-    //getConn().release();
-    
-    
-
   },
   count: (req,res) => {
     const items = JSON.parse(req.body.cartItems);
